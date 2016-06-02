@@ -403,5 +403,18 @@ class MockTest extends FreeSpec with MockFactory with ShouldMatchers {
 
       val m = mock[TestNonEmptyDefaultConstructor]
     }
+
+    "stub/mock a non-final method on a trait which has a (different) final method" in withExpectations {
+      val m = stub[FinalMethodTrait]
+      val expectedInt = 3
+      (m.someMethod _).when().returns(expectedInt)
+      m.someMethod should equal(expectedInt)
+    }
+
+    "not stub/mock a final method on a trait" in withExpectations {
+      val m = stub[FinalMethodTrait]
+      // it would be nice to make this a compile error, but... macro-fu not strong enough
+      a[NoSuchMethodException] should be thrownBy((m.someFinalMethod _).when().returns(3))
+    }
   }
 }
