@@ -1,5 +1,3 @@
-# ScalaMock
-
 ## Note
 
 This project is hopefully a temporary fork of the excellent https://github.com/paulbutcher/ScalaMock.
@@ -14,8 +12,10 @@ resolvers += "bintray-pagerduty-oss-maven" at "https://dl.bintray.com/pagerduty/
 
 Adding the dependency to your SBT build file:
 ```scala
-libraryDependencies += "com.pagerduty" %% "scalamock-scalatest-support" % "3.2.2" % "test"
+libraryDependencies += "com.pagerduty" %% "scalamock-scalatest-support" % "3.3.0" % "test"
 ```
+
+# ScalaMock
 
 Native Scala mocking.
 
