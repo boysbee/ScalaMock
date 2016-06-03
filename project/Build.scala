@@ -21,13 +21,18 @@
 import sbt._
 import Keys._
 import sbt.inc.Analysis
+import bintray.BintrayKeys._
 
 object BuildSettings {
-  val buildVersion = "3.2.2"
+  val buildVersion = "3.3.0"
   val buildScalaVersion = "2.11.5"
 
   val buildSettings = Defaults.coreDefaultSettings ++ Seq(
-    organization := "org.scalamock",
+    bintrayOrganization := Some("pagerduty"),
+    bintrayRepository := "oss-maven",
+    licenses += ("BSD Simplified", url("https://opensource.org/licenses/bsd-license.php")),
+    publishMavenStyle := true,
+    organization := "com.pagerduty",
     version := buildVersion,
     scalaVersion := buildScalaVersion,
     scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature"),
@@ -35,14 +40,6 @@ object BuildSettings {
     resolvers += Resolver.sonatypeRepo("releases"),
     resolvers += Resolver.sonatypeRepo("snapshots"),
     resolvers += "Scalaz Bintray Repo" at "http://dl.bintray.com/scalaz/releases",
-
-    publishTo <<= version { v =>
-      val nexus = "https://oss.sonatype.org/"
-      if (v.trim.endsWith("SNAPSHOT"))
-        Some("snapshots" at nexus + "content/repositories/snapshots") 
-      else
-        Some("releases" at nexus + "service/local/staging/deploy/maven2")
-    },
     pomIncludeRepository := { _ => false },
     publishArtifact in Test := false,
     pomExtra := (
@@ -55,14 +52,19 @@ object BuildSettings {
         </license>
       </licenses>
       <scm>
-        <url>git@github.com:paulbutcher/ScalaMock.git</url>
-        <connection>scm:git:git@github.com:paulbutcher/ScalaMock.git</connection>
+        <url>git@github.com:PagerDuty/ScalaMock.git</url>
+        <connection>scm:git:git@github.com:PagerDuty/ScalaMock.git</connection>
       </scm>
       <developers>
         <developer>
           <id>paulbutcher</id>
           <name>Paul Butcher</name>
           <url>http://paulbutcher.com/</url>
+        </developer>
+        <developer>
+          <id>pagerduty-core</id>
+          <name>PagerDuty Core Team</name>
+          <url>http://pagerduty.com/</url>
         </developer>
       </developers>),
   

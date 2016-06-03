@@ -1,4 +1,21 @@
-# ScalaMock [![Build Status](https://travis-ci.org/paulbutcher/ScalaMock.svg?branch=master)](https://travis-ci.org/paulbutcher/ScalaMock)
+# ScalaMock
+
+## Note
+
+This project is hopefully a temporary fork of the excellent https://github.com/paulbutcher/ScalaMock.
+
+While `scala.meta` is still elusive, and more systemic solutions to some of ScalaMock's quirks are out of reach, 
+we aim to publish a ScalaMock that fixes or works around some of the more annoying issues.
+
+This library is published to PagerDuty Bintray OSS Maven repository:
+```scala
+resolvers += "bintray-pagerduty-oss-maven" at "https://dl.bintray.com/pagerduty/oss-maven"
+```
+
+Adding the dependency to your SBT build file:
+```scala
+libraryDependencies += "com.pagerduty" %% "scalamock-scalatest-support" % "3.2.2" % "test"
+```
 
 Native Scala mocking.
 
