@@ -1,5 +1,11 @@
 # Release notes
 
+## New in (com.pagerduty) ScalaMock 3.3.0
+
+- [new feature] support for mocking non-final methods in traits with final methods
+- [new feature, 2.11 only] support for mocking classes with non-empty default constructor
+- [fix] better error message when invoking a mock after verification has been completed
+
 ## New in ScalaMock 3.2.1
 
 - [new feature] support for custom parameter matchers (issue #42)
