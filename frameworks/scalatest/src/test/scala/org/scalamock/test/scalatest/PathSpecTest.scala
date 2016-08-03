@@ -22,52 +22,41 @@ package org.scalamock.test.scalatest
 
 import org.scalamock.scalatest.PathMockFactory
 import org.scalatest.exceptions.TestFailedException
-import org.scalatest.{ Matchers, path }
+import org.scalatest.{Matchers, path}
 
 class PathSpecTest extends path.FunSpec with Matchers with PathMockFactory {
-
+  
   describe("PathSpec") {
     val mockFun = mockFunction[String, Unit]
     mockFun expects "top-level"
-
+    
     describe("can handle stackable expectations") {
       mockFun expects "mid-level"
       mockFun("top-level")
-
+      
       it("does not throw exception if all expectations are met") {
         mockFun("mid-level")
         verifyExpectations()
       }
-
+      
       it("fails if mid-level expectation is not met") {
         an[TestFailedException] should be thrownBy verifyExpectations()
       }
     }
-
+    
     it("fails if top-level expectation is not met") {
       an[TestFailedException] should be thrownBy verifyExpectations()
     }
-  }
-
-  describe("PathSpec") {
-    val mockFun = mockFunction[String, Unit]("mockFun")
-
+    
     it("can have expectations checked at the end of root suite") {
+      val mockFun = mockFunction[String, Unit]("mockFun")
       mockFun expects "bottom-level"
+      val caught = intercept[TestFailedException] {
+        verifyExpectations()
+      }
+      caught.getMessage() should include("mockFun(bottom-level) once (never called - UNSATISFIED)")
     }
-
-    val testFailedException = trap({ verifyExpectations() }).asInstanceOf[TestFailedException]
-    testFailedException.getMessage() should include("mockFun(bottom-level) once (never called - UNSATISFIED)")
+    
   }
-
-  describe("PathSpec") {
-    val mockFun = mockFunction[String, Unit]
-
-    it("throws an exception with good error message if the mock is called after expectations are verified") {
-      verifyExpectations()
-      val thrown = the [RuntimeException] thrownBy(mockFun("called after verification"))
-      thrown should not be a[NullPointerException]
-      thrown.getMessage should include ("have expectations been verified already?")
-    }
-  }
+  
 }

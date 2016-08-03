@@ -20,10 +20,10 @@
 
 package com.example.function
 
-import org.scalatest.Spec
 import org.scalamock.scalatest.MockFactory
+import org.scalatest.refspec.RefSpec
 
-class HigherOrderFunctionsTest extends Spec with MockFactory {
+class HigherOrderFunctionsTest extends RefSpec with MockFactory {
   import language.postfixOps
   
   def testMap {

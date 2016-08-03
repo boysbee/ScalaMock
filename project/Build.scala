@@ -25,7 +25,7 @@ import bintray.BintrayKeys._
 
 object BuildSettings {
   val buildVersion = "3.3.0"
-  val buildScalaVersion = "2.11.5"
+  val buildScalaVersion = "2.11.8"
 
   val buildSettings = Defaults.coreDefaultSettings ++ Seq(
     bintrayOrganization := Some("pagerduty"),
@@ -94,7 +94,7 @@ object ShellPrompt {
 }
 
 object Dependencies {
-  val scalatest =  "org.scalatest" %% "scalatest" % "2.2.4"
+  val scalatest =  "org.scalatest" %% "scalatest" % "3.0.0"
   val specs2 = "org.specs2" %% "specs2" % "2.4.16"
   val reflect = "org.scala-lang" % "scala-reflect" % BuildSettings.buildScalaVersion
 
